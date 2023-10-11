@@ -48,7 +48,11 @@ while cap.isOpened()==True :
     if ret==True :
         # process the video files and save its frame colectively
         # straigthen the image by median blur
-        frame1 = cv2.medianBlur(frame , 5)
+        frame_1 = cv2.medianBlur(frame , 5)
+        frame_2 = cv2.GaussianBLur(frame , (5 , 5) , 0)
+
+        frame1 = cv2.addWeighted(frame_1 , 0.5 , frame_2 , 0.5)
+
         img = cv2.cvtColor(frame1 , cv2.COLOR_BGR2GRAY)
 
         edges = cv2.Canny(img , 30 , 200)
